@@ -12,6 +12,11 @@ public class Character
         name = n;
         hp = h;
     }
+    public void ReceiveDamage(int damage) //method
+    {
+        hp -= damage;
+        if (hp < 0) hp = 0;
+    }
 }
 public class Gameplay : MonoBehaviour
 {
@@ -21,7 +26,7 @@ public class Gameplay : MonoBehaviour
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        player = new Character("PicoChan", 50);
+        player = new Character("PicoChan", 100);
         playerName = GameObject.Find("PlayerName").GetComponent<TextMeshProUGUI>();
         hpBar = GameObject.Find("hp").GetComponent<Image>();
         playerName.text = player.name;
@@ -31,5 +36,10 @@ public class Gameplay : MonoBehaviour
     void Update()
     {
         hpBar.fillAmount = (float)player.hp / 100;
+    }
+    public void ReceiveDamage(int damage) //method
+    {
+        player.hp -= damage;
+        if (player.hp < 0) player.hp = 0;
     }
 }
