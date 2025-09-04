@@ -1,3 +1,3 @@
 ActionRPG by Unity
 ffjbjjjjbbdjbwjd
-SEENitTid
+"เช็กภาษาไทย"
