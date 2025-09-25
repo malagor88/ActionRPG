@@ -1,11 +1,14 @@
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.AI;
+using UnityEngine.UI;
 
 public class SlimeChasePlayer : MonoBehaviour
 {
     NavMeshAgent agent;
     public GameObject player;
+    public Image hpBar;
+    public float hp = 100f;
 
     public float stopDistance = 1f;
     public float detectionRange = 10f;
@@ -42,6 +45,7 @@ public class SlimeChasePlayer : MonoBehaviour
             StopMoving();
         }
         UpdateAnimation();
+        UpdateUI();
     }
     void MoveToPlayer()
     {
@@ -62,5 +66,22 @@ public class SlimeChasePlayer : MonoBehaviour
     void UpdateAnimation()
     {
         anim.SetBool("Atteck", !hasReachePlayer);
+    }
+
+    void UpdateUI()
+    {
+        hpBar.fillAmount = hp / 100f;
+        if (hp <= 0)
+        {
+            Destroy(gameObject);
+        }
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.CompareTag("Sword"))
+        {
+            hp -= 30f;
+        }
     }
 }
